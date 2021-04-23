@@ -1,0 +1,133 @@
+﻿@model GreenForkRecipes.ViewModels.Recipes.RecipeDetailsVM
+
+@{
+    ViewData["Title"] = "Recipe Details";
+}
+
+
+<h2>@ViewData["Title"]</h2>
+<div>
+    <h3>@Model.Title</h3>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+        <dd class="col-sm-10">
+            <div class="w-100 img-thumbnail col-5">
+                @if (Model.Picture == null)
+                {
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/000/086/431/small/free-vector-paper-plate.jpg" alt="profile-pic" />
+                }
+                else
+                {
+                    <img class="card-img-top" src="~/images/@Model.Picture" alt="Card image cap">
+                }
+            </div>
+        </dd>
+        <dt class="col-sm-2">
+            Author
+        </dt>
+        <dd class="col-sm-10">
+            @Html.ActionLink(Model.User.FirstName + " " + Model.User.LastName + " - (" + Model.User.Username + ")", "Details", "Profile", new { id = Model.User.Id })
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CookTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CookTime) minutes
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ingredients)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ingredients)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Directions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Directions)
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (Model.UserId == GreenForkRecipes.Services.AuthenticationService.LoggedUser.Id)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        <span>|</span>
+    }
+
+
+    <a asp-action="List">Back to Trending Recipes</a>
+</div>
+<div>
+    @{ViewData["Title"] = "Comments";}
+
+    <h2>@ViewData["Title"]</h2>
+
+    @ViewData["CommentError"]
+
+<p>
+    <button onclick="createEditPartialView()" class="btn btn-outline-primary">Comment this recipe</button>
+    <script type="text/javascript">
+
+                function createEditPartialView() {
+                    $("#editCommentPartialDiv").load('@Url.Action("Edit","RecipeComment",new {recipeId = Model.Id})');
+                }
+    </script> 
+    <div id="editCommentPartialDiv"></div>
+</p>
+    <div class="container">
+        <div>
+            @foreach (var item in Model.Comments)
+            {
+
+                <div class="row padding-10">
+                    <div class="col-1 w-100">
+                        @if (item.User.Picture == null)
+                        {
+
+                            <img src="https://cdn3.iconfinder.com/data/icons/avatar-color/64/19-512.png" alt="profile-pic" class="full-circle-4" />
+                        }
+                        else
+                        {
+                            <img class="full-circle-4" src="~/images/@item.User.Picture" alt="Profile-pic" />}
+
+
+                    </div>
+                    <div class="col-8">
+                        <div>
+                            @Html.ActionLink($"{item.User.FirstName} {item.User.LastName}", "Details", "Profile", new { id = item.UserId })
+                        </div>
+                        <div>
+                            @Html.DisplayFor(modelItem => item.Comment)
+                        </div>
+                    </div>
+
+                    @if (GreenForkRecipes.Services.AuthenticationService.LoggedUser.Id == item.UserId)
+                    {
+
+                        <div class="col-3">
+                            <input type="button" id="btn" name="@item.Id " class="btn btn-outline-secondary"  value="Edit"  onclick=
+                                   '(function (){
+                                        $("#editCommentPartialDiv").load("@Url.Action("Edit","RecipeComment",new { id = item.Id, recipeId = Model.Id})");
+                                    })();'
+                                   
+                           /> |
+
+                            <button class="btn btn-outline-secondary">@Html.ActionLink("Delete", "Delete", "RecipeComment", new { id = item.Id })</button>
+                        </div>
+                    }
+
+                </div>
+               
+            }
+
+
+        </div>
+    </div>
+</div>
+
+
+

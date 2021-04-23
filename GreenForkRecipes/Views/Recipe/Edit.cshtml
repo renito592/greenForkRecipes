@@ -1,0 +1,66 @@
+﻿@model GreenForkRecipes.ViewModels.Recipe.RecipeEditVM
+
+@{
+    ViewData["EditMode"] = "Edit";
+    ViewData["CreateMode"] = "Create new";
+}
+
+        @if (Model.Id == 0)
+        {
+            <h1>
+               @ViewData["CreateMode"]
+            </h1>
+        }
+         else
+        {  <h1>
+                 @ViewData["EditMode"]
+            </h1>
+         }
+
+
+    <h4>RecipeEditVM</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CookTime" class="control-label"></label>
+                    <input asp-for="CookTime" class="form-control" />
+                    <span asp-validation-for="CookTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ingredients" class="control-label"></label>
+                    <textarea asp-for="Ingredients" class="form-control" rows="10" cols="50"></textarea>
+                    <span asp-validation-for="Ingredients" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Directions" class="control-label"></label>
+                    <textarea asp-for="Directions" class="form-control" rows="10" cols="50"></textarea>
+                    <span asp-validation-for="Directions" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PictureFile" class="control-label"></label>
+                    <input asp-for="PictureFile" type="file" class="form-control" />
+                    <span asp-validation-for="PictureFile" class="text-danger"></span>
+                </div>
+                <input asp-for="Id" type="hidden" class="form-control" />
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="List">Back to Trending Recipes</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

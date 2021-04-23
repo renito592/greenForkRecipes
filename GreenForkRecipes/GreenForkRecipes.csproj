@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20201101173611_Initial.cs" />
+    <Compile Remove="Migrations\20201101173611_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201101173910_Initial.cs" />
+    <Compile Remove="Migrations\20201101173910_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201101174210_Initial.cs" />
+    <Compile Remove="Migrations\20201101174210_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201101174501_Initial.cs" />
+    <Compile Remove="Migrations\20201101174501_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201101174724_Initial.cs" />
+    <Compile Remove="Migrations\20201101174724_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201102195825_Initial.cs" />
+    <Compile Remove="Migrations\20201102195825_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201102200413_Initial.cs" />
+    <Compile Remove="Migrations\20201102200413_Initial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+</Project>

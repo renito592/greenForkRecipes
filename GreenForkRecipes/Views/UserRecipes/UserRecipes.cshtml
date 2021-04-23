@@ -1,0 +1,37 @@
+﻿
+@model List<GreenForkRecipes.ViewModels.UserRecipes.UserRecipesVM>
+
+@{
+    ViewData["Title"] = "User's Recipes";
+}
+
+<h2>@ViewData["Title"]</h2>
+<p>
+    @Html.ActionLink("Create New", "Edit","Recipe")
+</p>
+<div class="grid-container">
+    @foreach (var item in Model)
+    {
+    <div class="card" style="width: 18rem;">
+        @if (item.Picture == null)
+        {
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/000/086/431/small/free-vector-paper-plate.jpg" alt="profile-pic" />
+        }
+        else
+        {
+            <img class="card-img-top" src="~/images/@item.Picture" alt="Card image cap">
+        }
+        <div class="card-body">
+            <h5 class="card-title">@item.Title</h5>
+
+            @Html.ActionLink("Details", "Details", "Recipe", new { id = item.Id }, new { @class = "btn btn-primary" })
+            @if (GreenForkRecipes.Services.AuthenticationService.LoggedUser.Id == item.UserId)
+            {
+                @Html.ActionLink("Edit", "Edit", "Recipe", new { id = item.Id }) <span> |</span>
+                @Html.ActionLink("Delete", "Delete", "Recipe", new { id = item.Id, profileRoute = true });
+            }
+
+        </div>
+    </div>
+    }
+</div>

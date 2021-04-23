@@ -1,0 +1,69 @@
+﻿@model GreenForkRecipes.ViewModels.Profile.UserProfileDetailsVM
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4>
+    @Html.DisplayFor(model => model.FirstName) &nbsp;
+    @Html.DisplayFor(model => model.LastName)
+</h4>
+    <hr />
+    <div class="row">
+        <div class="col-4">              
+                    @if (Model.Picture == null)
+                    {
+                         <img src="https://cdn3.iconfinder.com/data/icons/avatar-color/64/19-512.png" alt="profile-pic" class="full-circle-10" />
+                    }
+                    else { 
+                         <img src="~/images/@Model.Picture" alt="profile-pic" class="full-circle-10" />
+                         }                 
+        </div>
+        <div class="col-6">
+            <div class="container">
+                <div class="row">
+                   <strong> @Html.DisplayFor(model => model.FirstName) &nbsp;
+                    @Html.DisplayFor(model => model.LastName) </strong>
+                </div>
+                <div class="row">
+                 <strong>   @Html.DisplayNameFor(model => model.Username) : &nbsp; </strong>
+                    @Html.DisplayFor(model => model.Username)
+                </div>
+
+
+                <div class="row">
+
+                 <strong>   @Html.DisplayNameFor(model => model.Gender) : &nbsp; </strong>
+
+                    @if (Model.Gender == GreenForkRecipes.Enums.GenderValues.Undefines)
+                    {
+                        <span>I'm too shy to confess</span>
+                    }
+                    else
+                        @Html.DisplayFor(model => model.Gender)
+
+                </div>
+                <div class="row">
+
+                   <strong> @Html.DisplayNameFor(model => model.Bio) : &nbsp; </strong>
+
+                    @Html.DisplayFor(model => model.Bio)
+
+                </div>
+                <div class="row">
+                    <strong>   @Html.DisplayNameFor(model => model.CookingPoints) : &nbsp; </strong>
+                    @Html.DisplayFor(model => model.CookingPoints)
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+</div>
+<partial name="~/Views/UserRecipes/UserRecipes.cshtml" model="Model.Recipes"/>

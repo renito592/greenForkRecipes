@@ -1,0 +1,36 @@
+﻿
+.grid-container {
+    display : grid;
+    grid-template-columns : auto auto auto;
+}
+ .card {
+     margin-bottom : 10px;
+ }
+
+.full-circle-4 {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+}
+.full-circle-10 {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+}
+.padding-10 {
+    padding:10px;
+}
+
+@media (max-width : 1024px) {
+    .grid-container {
+        grid-template-columns: auto auto;
+    }
+}
+@media (max-width : 786px) {
+    .grid-container {
+        display : block;
+        text-align : center;
+    }
+}
